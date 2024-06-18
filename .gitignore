@@ -1,0 +1,11 @@
+# IDE
+/.idea/
+/.fleet/
+/.run/
+
+# Dependency directories
+node_modules/
+
+# Prevent Source Map from being commited
+dist/index.js.map
+dist/sourcemap-register.js

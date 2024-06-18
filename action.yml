@@ -1,0 +1,15 @@
+name: 'Latest PHP Releases'
+description: 'A Github Action to fetch a list of active PHP releases.'
+author: 'Dominik Szamburski'
+
+branding:
+    icon: 'package'
+    color: 'blue'
+
+outputs:
+    releases:
+        description: The list of latest releases, as a list of objects (`object[]`).
+
+runs:
+    using: node20
+    main: dist/index.js

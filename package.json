@@ -20,6 +20,7 @@
         "url": "git+https://github.com/nulxrd/latest-php-releases-action.git"
     },
     "scripts": {
+        "bundle": "npm run lint && npm run build",
         "build": "ncc build ./src/index.ts -o dist --source-map --minify --license licenses.txt",
         "build:watch": "ncc build ./src/index.ts -o dist --source-map --watch",
         "lint": "eslint .",

@@ -1,0 +1,31 @@
+name: PHP Latest Releases
+
+on:
+  pull_request:
+  push:
+
+jobs:
+  latest-releases:
+    runs-on: ubuntu-latest
+    outputs:
+      releases: ${{ steps.get-latest-releases.outputs.releases }}
+    steps:
+      -
+        name: checkout
+        uses: actions/checkout@v4
+      - uses: ./
+        id: get-latest-releases
+
+  print-php-version:
+    needs: [ 'latest-releases' ]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        releases: ${{ fromJson(needs.latest-releases.outputs.releases)}}
+    steps:
+      -
+        name: checkout
+        uses: actions/checkout@v4
+      -
+        run: echo "php-${{ matrix.releases.version }}"
+

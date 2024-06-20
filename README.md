@@ -41,23 +41,36 @@ The list of latest releases, as a list of objects (`object[]`).
 ```yaml
 name: PHP Latest Releases
 
-on: pull_request
+on:
+  pull_request:
+  push:
 
 jobs:
-    latest-releases:
-        runs-on: ubuntu-latest
-        outputs:
-            releases: ${{ steps.get-latest-releases.outputs.releases }}
-        steps:
-            - uses: nulxrd/latest-php-releases-action@v1
-              id: get-latest-releases
+  latest-releases:
+    runs-on: ubuntu-latest
+    outputs:
+      releases: ${{ steps.get-latest-releases.outputs.releases }}
+    steps:
+      -
+        name: checkout
+        uses: actions/checkout@v4
+      - uses: nulxrd/latest-php-releases-action@v1
+        id: get-latest-releases
 
-    test:
-        needs: ['latest-releases']
-        runs-on: ubuntu-latest
-        strategy:
-            matrix:
-                releases: ${{ fromJson(needs.latest-releases.outputs.releases)}}
+  print-php-version:
+    needs: [ 'latest-releases' ]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        releases: ${{ fromJson(needs.latest-releases.outputs.releases)}}
+    steps:
+      -
+        name: checkout
+        uses: actions/checkout@v4
+      -
+        run: echo "php-${{ matrix.releases.version }}"
+
+
 ```
 
 ## License

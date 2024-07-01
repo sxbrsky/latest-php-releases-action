@@ -6,7 +6,7 @@ A GitHub Action to fetch a list of active PHP releases from [php.net](https://ph
 
 ### `releases`
 
-The list of latest releases, as a list of objects (`object[]`).
+The list of the latest releases, as a list of objects (`object[]`).
 
 ```json
 [
@@ -51,8 +51,7 @@ jobs:
     outputs:
       releases: ${{ steps.get-latest-releases.outputs.releases }}
     steps:
-      -
-        name: checkout
+      - name: Checkout
         uses: actions/checkout@v4
       - uses: nulxrd/latest-php-releases-action@v1
         id: get-latest-releases
@@ -62,15 +61,11 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        releases: ${{ fromJson(needs.latest-releases.outputs.releases)}}
+        releases: ${{ fromJson(needs.latest-releases.outputs.releases) }}
     steps:
-      -
-        name: checkout
+      - name: Checkout
         uses: actions/checkout@v4
-      -
-        run: echo "php-${{ matrix.releases.version }}"
-
-
+      - run: echo "php-${{ matrix.releases.version }}"
 ```
 
 ## License

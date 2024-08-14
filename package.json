@@ -10,14 +10,14 @@
     "author": {
         "email": "dominikszamburski99@gmail.com",
         "name": "Dominik Szamburski",
-        "url": "https://github.com/nulxrd"
+        "url": "https://github.com/sxbrsky"
     },
     "exports": {
         ".": "./dist/index.js"
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/nulxrd/latest-php-releases-action.git"
+        "url": "git+https://github.com/sxbrsky/latest-php-releases-action.git"
     },
     "scripts": {
         "bundle": "npm run lint && npm run build",
